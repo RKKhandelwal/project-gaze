@@ -1,0 +1,46 @@
+[Unit]
+Description=Gaze Tennis Court Sensor Service
+Documentation=https://github.com/your-org/gaze
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+User=gaze
+Group=gaze
+
+# Application
+ExecStart=/opt/gaze/venv/bin/python -m sensor.main
+WorkingDirectory=/opt/gaze
+Restart=always
+RestartSec=10
+
+# Environment
+EnvironmentFile=-/etc/gaze/env
+
+# Watchdog: systemd will restart the service if it stops notifying
+WatchdogSec=120
+
+# Resource limits (Pi Zero 2W has 512MB RAM)
+MemoryMax=100M
+MemoryHigh=80M
+CPUQuota=50%
+
+# Security hardening
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/var/lib/gaze /var/log/gaze
+
+# Allow access to UART device (PL011 on Pi Zero 2W after miniuart-bt overlay)
+SupplementaryGroups=dialout
+DeviceAllow=/dev/ttyAMA0 rw
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=gaze-sensor
+
+[Install]
+WantedBy=multi-user.target

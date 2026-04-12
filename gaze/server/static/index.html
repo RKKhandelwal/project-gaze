@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Gaze — Court Availability</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+<header class="header">
+    <div>
+        <div class="title">Project Gaze</div>
+        <div class="subtitle">Tennis Court Availability</div>
+    </div>
+    <div class="header-meta">
+        <span class="connection-chip" id="connStatus">
+            <span class="chip-dot"></span>
+            <span class="chip-label">connecting</span>
+        </span>
+        <span class="last-updated" id="lastUpdated"></span>
+    </div>
+</header>
+
+<main>
+    <div class="courts-wrapper">
+        <div class="courts-row" id="courtsRow">
+            <!-- Court cards rendered by JS -->
+        </div>
+    </div>
+    <p class="empty-state" id="emptyState">Loading courts...</p>
+
+    <!-- Historical timeline scrubber (288 × 5-minute slots over last 24h) -->
+    <div class="timeline-bar" id="timelineBar">
+        <div class="timeline-header">
+            <div class="timeline-label">Timeline</div>
+            <div class="timeline-readout">
+                <span class="timeline-time" id="timelineTime">--:--</span>
+                <span class="timeline-live-badge" id="timelineLiveBadge">live</span>
+            </div>
+            <button class="timeline-now-btn" id="timelineNowBtn" type="button">now →</button>
+        </div>
+        <input class="timeline-slider" type="range" id="timelineSlider"
+               min="0" max="287" step="1" value="287" aria-label="Scrub through last 24 hours">
+        <div class="timeline-ticks">
+            <span>24h ago</span>
+            <span>18h</span>
+            <span>12h</span>
+            <span>6h</span>
+            <span>now</span>
+        </div>
+    </div>
+
+    <!-- Detailed Predictions Panel (shown when a court is clicked) -->
+    <div class="predictions-panel hidden" id="predictionsPanel">
+        <div class="predictions-header">
+            <h2 id="predCourtName">Court Predictions</h2>
+            <button class="predictions-close" id="predClose">&times;</button>
+        </div>
+        <div class="predictions-body">
+            <div class="pred-section">
+                <h3>Right Now</h3>
+                <div class="pred-current" id="predCurrent"></div>
+            </div>
+            <div class="pred-section">
+                <h3>Next 6 Hours</h3>
+                <div class="pred-next-hours" id="predNextHours"></div>
+            </div>
+            <div class="pred-section">
+                <h3>Peak Hours</h3>
+                <div class="pred-peak" id="predPeak"></div>
+            </div>
+            <div class="pred-section">
+                <h3>Best Times to Play</h3>
+                <div class="pred-best" id="predBest"></div>
+            </div>
+            <div class="pred-section">
+                <h3>Weekly Heatmap</h3>
+                <div class="pred-heatmap" id="predHeatmap"></div>
+            </div>
+            <div class="pred-section">
+                <h3>Daylight Usage (6am–8pm)</h3>
+                <div class="pred-daylight" id="predDaylight"></div>
+            </div>
+            <div class="pred-section">
+                <h3>Session Patterns</h3>
+                <div class="pred-sessions" id="predSessions"></div>
+            </div>
+            <div class="pred-footer" id="predFooter"></div>
+        </div>
+    </div>
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
