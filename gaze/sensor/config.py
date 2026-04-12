@@ -5,8 +5,7 @@ Loads from environment variables with production-safe defaults.
 Designed for Raspberry Pi Zero 2W with 1x HLK-LD1125H mmWave sensor.
 
 The LD1125H uses an ASCII text protocol (e.g., "mov, dis=234", "occ, dis=156")
-driven by gaze/sensor/ld1125h.py. The older gaze/sensor/ld2412.py (binary
-frame protocol) is retained as reference only and is no longer imported.
+driven by gaze/sensor/ld1125h.py.
 See gaze/docs/hardware-guide.md Appendix A for protocol details.
 """
 
