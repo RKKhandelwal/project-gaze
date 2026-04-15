@@ -7,5 +7,5 @@ enum Config {
 
     // Anon (public) key — safe to ship in the app.
     // Replace with the anon key from Supabase → Project Settings → API.
-    static let supabaseAnonKey = "REPLACE_WITH_ANON_KEY"
+    static let supabaseAnonKey = "sb_publishable_yYVAsVC9W0-AE6GKjR6lyw_WbBRWXN-"
 }

@@ -47,14 +47,10 @@ final class CourtsModel {
                 schema: "public",
                 table: "events"
             )
-            await channel.subscribe()
+            try? await channel.subscribeWithError()
             for await _ in inserts {
                 await self.refresh()
             }
         }
-    }
-
-    deinit {
-        realtimeTask?.cancel()
     }
 }

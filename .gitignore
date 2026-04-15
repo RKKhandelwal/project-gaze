@@ -17,3 +17,11 @@ __pycache__/
 .idea/
 .vscode/
 .claude/
+
+# Vercel CLI
+.vercel/
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
