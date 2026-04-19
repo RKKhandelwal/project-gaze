@@ -1,0 +1,28 @@
+{
+  "name": "gaze-workspace",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev:server": "pnpm --filter server dev",
+    "build:server": "pnpm --filter server build",
+    "start:server": "pnpm --filter server start",
+    "typecheck:server": "pnpm --filter server typecheck",
+    "lint:server": "pnpm --filter server lint",
+    "start:mobile": "pnpm --filter mobile start -- --clear",
+    "ios:mobile": "pnpm --filter mobile ios",
+    "android:mobile": "pnpm --filter mobile android",
+    "typecheck:mobile": "pnpm --filter mobile typecheck",
+    "lint:mobile": "pnpm --filter mobile lint",
+    "dev:tmux": "./scripts/dev-tmux.sh",
+    "gaze:admin": "node scripts/gaze-admin-cli.mjs",
+    "db:push": "pnpm --filter server db:push",
+    "build:types": "pnpm --filter @gaze/types build",
+    "typecheck:types": "pnpm --filter @gaze/types typecheck",
+    "build": "pnpm build:types && pnpm build:server",
+    "typecheck": "pnpm typecheck:types && pnpm typecheck:server && pnpm typecheck:mobile"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

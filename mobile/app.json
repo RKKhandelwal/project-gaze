@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Gaze",
+    "slug": "gaze",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "gaze",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0B1220"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.projectgaze.mobile"
+    },
+    "android": {
+      "package": "com.projectgaze.mobile",
+      "adaptiveIcon": {
+        "backgroundColor": "#0B1220"
+      }
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "extra": {}
+  }
+}

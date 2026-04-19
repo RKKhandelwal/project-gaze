@@ -25,3 +25,21 @@ __pycache__/
 xcuserdata/
 *.xcuserstate
 DerivedData/
+
+# Node / package managers
+node_modules/
+**/node_modules/
+package-lock.json
+**/package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# Expo / React Native caches
+.expo/
+.expo-shared/
+web-build/
+dist/
+build/
