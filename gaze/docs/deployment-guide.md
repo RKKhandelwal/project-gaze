@@ -1,6 +1,6 @@
 # Gaze Server Deployment Guide
 
-Three ways to get the Gaze server running on the internet so Raspberry Pi devices can reach it.
+Three ways to get the Gaze server running on the internet so Raspberry Pi devices can reach it:
 
 ---
 
