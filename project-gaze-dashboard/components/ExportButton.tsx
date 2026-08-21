@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { OccupancyPoint } from "@/lib/types";
 import { exportOccupancy, type ExportFormat } from "@/lib/exportOccupancy";
+import { tzAbbrev } from "@/lib/tz";
 
 interface Props {
   /** Points for the currently selected day. */
@@ -42,7 +43,7 @@ export default function ExportButton({
   const run = (scope: "day" | "all", format: ExportFormat) => {
     const points = scope === "day" ? dayPoints : allPoints;
     const label = scope === "day" ? selectedDay ?? "day" : "all-days";
-    exportOccupancy(points, tz, format, label);
+    exportOccupancy(points, tz, format, label, tzAbbrev(tz));
     setOpen(false);
   };
 
