@@ -13,6 +13,7 @@ import DaySelector, { type DayEntry } from "./DaySelector";
 import OccupancyChart from "./OccupancyChart";
 import WeekSparkline from "./WeekSparkline";
 import VideoPlayer from "./VideoPlayer";
+import ExportButton from "./ExportButton";
 
 export default function Dashboard() {
   const state = useIndexData();
@@ -165,9 +166,17 @@ export default function Dashboard() {
                 {selectedDay ?? "No day selected"}
               </div>
             </div>
-            {daySummary && (
-              <div className="chart-peak mono">peak {daySummary.max}</div>
-            )}
+            <div className="chart-header-actions">
+              {daySummary && (
+                <div className="chart-peak mono">peak {daySummary.max}</div>
+              )}
+              <ExportButton
+                dayPoints={filteredOccupancy}
+                allPoints={data.occupancy_minute}
+                selectedDay={selectedDay}
+                tz={tz}
+              />
+            </div>
           </div>
           <OccupancyChart
             points={filteredOccupancy}
