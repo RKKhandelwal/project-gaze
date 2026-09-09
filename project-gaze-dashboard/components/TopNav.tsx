@@ -21,10 +21,7 @@ export default function TopNav() {
       </div>
 
       <nav className="topnav-tabs" aria-label="Sections">
-        <Link
-          href="/"
-          className={`nav-tab ${path === "/" ? "active" : ""}`}
-        >
+        <Link href="/" className={`nav-tab ${path === "/" ? "active" : ""}`}>
           Dashboard
         </Link>
         <Link
@@ -32,6 +29,12 @@ export default function TopNav() {
           className={`nav-tab ${path === "/insights" ? "active" : ""}`}
         >
           Insights
+        </Link>
+        <Link
+          href="/settings"
+          className={`nav-tab ${path === "/settings" ? "active" : ""}`}
+        >
+          Settings
         </Link>
       </nav>
 

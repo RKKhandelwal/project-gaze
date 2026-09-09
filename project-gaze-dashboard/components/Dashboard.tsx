@@ -2,16 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { Segment, DaySummary } from "@/lib/types";
-import {
-  dayKeyInTZ,
-  dayRange,
-  formatDateRangeInTZ,
-} from "@/lib/tz";
+import { dayKeyInTZ, dayRange, formatDateRangeInTZ } from "@/lib/tz";
 import { useTimezone } from "@/lib/TimezoneContext";
 import { useIndexData } from "@/lib/useIndexData";
 import DaySelector, { type DayEntry } from "./DaySelector";
 import OccupancyChart from "./OccupancyChart";
 import WeekSparkline from "./WeekSparkline";
+import VideoFeedGate from "./VideoFeedGate";
 import VideoPlayer from "./VideoPlayer";
 import ExportButton from "./ExportButton";
 
@@ -73,8 +70,7 @@ export default function Dashboard() {
     if (state.kind !== "ready" || !selectedDay) return [];
     return state.data.segments
       .filter(
-        (s) =>
-          dayKeyInTZ(new Date(s.start_utc).getTime(), tz) === selectedDay,
+        (s) => dayKeyInTZ(new Date(s.start_utc).getTime(), tz) === selectedDay,
       )
       .sort(
         (a, b) =>
@@ -189,27 +185,32 @@ export default function Dashboard() {
       </div>
 
       <aside className="col-right">
-        {selectedSegment ? (
-          <VideoPlayer
-            segment={selectedSegment}
-            onClose={() => setSelectedFileID(null)}
-            tz={tz}
-          />
-        ) : (
-          <div className="card video-placeholder">
-            <div className="card-label">Video</div>
-            <div className="placeholder-body">
-              <div className="placeholder-icon" aria-hidden>
-                ▶
+        <VideoFeedGate>
+          {selectedSegment ? (
+            <VideoPlayer
+              segment={selectedSegment}
+              onClose={() => setSelectedFileID(null)}
+              tz={tz}
+            />
+          ) : (
+            <div className="card video-placeholder">
+              <div className="card-label">Video</div>
+              <div className="placeholder-body">
+                <div className="placeholder-icon" aria-hidden>
+                  ▶
+                </div>
+                <p>
+                  Click anywhere on the occupancy chart to load the closest
+                  segment&apos;s overlay video here.
+                </p>
+                <p className="muted small">
+                  {segmentsForDay.length} segments available on{" "}
+                  {selectedDay ?? "—"}
+                </p>
               </div>
-              <p>Click anywhere on the occupancy chart to load the closest segment&apos;s overlay video here.</p>
-              <p className="muted small">
-                {segmentsForDay.length} segments available on{" "}
-                {selectedDay ?? "—"}
-              </p>
             </div>
-          </div>
-        )}
+          )}
+        </VideoFeedGate>
       </aside>
     </main>
   );
