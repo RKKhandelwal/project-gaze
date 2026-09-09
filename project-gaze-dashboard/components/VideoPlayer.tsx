@@ -22,16 +22,18 @@ export default function VideoPlayer({ segment, onClose, tz }: Props) {
 
   useEffect(() => {
     let cancelled = false;
+    const controller = new AbortController();
     setState({ kind: "loading" });
 
-    fetch(`/api/video?fileID=${encodeURIComponent(segment.fileID)}`)
+    fetch(`/api/video?fileID=${encodeURIComponent(segment.fileID)}`, {
+      signal: controller.signal,
+    })
       .then(async (r) => {
         if (!r.ok) {
           const body = await r.json().catch(() => ({}));
-          throw Object.assign(
-            new Error(body?.error || `HTTP ${r.status}`),
-            { status: r.status },
-          );
+          throw Object.assign(new Error(body?.error || `HTTP ${r.status}`), {
+            status: r.status,
+          });
         }
         return r.json() as Promise<VideoUrlResponse>;
       })
@@ -50,6 +52,7 @@ export default function VideoPlayer({ segment, onClose, tz }: Props) {
 
     return () => {
       cancelled = true;
+      controller.abort();
     };
   }, [segment.fileID]);
 

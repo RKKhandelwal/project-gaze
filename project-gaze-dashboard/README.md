@@ -38,3 +38,18 @@ required.
 - `GET /api/video?fileID=<id>` — returns `{ url, expiresAt }` where `url` is a
   presigned GET URL for `overlays/<id>.mp4`, valid for 1 hour. `fileID` is
   validated against `^[A-Za-z0-9_-]{1,128}$`.
+
+
+## Video feed preference
+
+Settings → **Show video feed** controls footage visibility for this browser. The preference is stored as `gaze.videoFeedEnabled` in local storage, defaults to on, and syncs between tabs. When off, the dashboard shows “Zero-Day retention enabled - video feed isn't available” in place of the player, including before a segment is selected. No player is mounted and no signed-video URL is requested until the stored preference has loaded and is enabled. Disabling playback unmounts the player and aborts any pending URL request.
+
+This is a frontend visibility preference, not a server retention or deletion policy. Occupancy data and server storage are unchanged.
+
+The dashboard is outside the root pnpm workspace. Install and test it independently:
+
+```sh
+pnpm --dir project-gaze-dashboard install --ignore-workspace --frozen-lockfile
+pnpm --dir project-gaze-dashboard test
+pnpm --dir project-gaze-dashboard build
+```

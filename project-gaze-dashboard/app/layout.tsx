@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { TimezoneProvider } from "@/lib/TimezoneContext";
+import { VideoFeedProvider } from "@/lib/VideoFeedContext";
 import TopNav from "@/components/TopNav";
 import Chat from "@/components/Chat";
 
@@ -34,9 +35,11 @@ export default function RootLayout({
     <html lang="en" className={`${plex.variable} ${mono.variable}`}>
       <body>
         <TimezoneProvider>
-          <TopNav />
-          {children}
-          <Chat />
+          <VideoFeedProvider>
+            <TopNav />
+            {children}
+            <Chat />
+          </VideoFeedProvider>
         </TimezoneProvider>
       </body>
     </html>
